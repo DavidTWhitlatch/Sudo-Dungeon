@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+}
+
+header {
+    border-bottom: 2px solid black;
+}
+
+h1 {
+    text-align: center;
+}
+
+div {
+    text-align: center;
+    margin: 50px;
+}
+
+.start-btn{
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+	display: inline-block;
+	margin:5px;
+    font-weight: bold;
+    padding: 10px 10px 10px 10px ;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 7px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+
+}
+.start-btn:active {
+	box-shadow: none;
+	position: relative;
+	top: .2em;
+}
+
+.play {
+    font-size: 70px;
+    padding: 40px 20px 40px 40px;
+}
+
+.clearfix {
+    margin: 0;
+}
+
+.clearfix:after {
+    content: " ";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+ }
+
+ aside {
+    color: white;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    background-color:black;
+    width: 20vw;
+    height: 80vh;
+ }
+
+ footer {
+    color: white;
+    position:fixed;
+    bottom:0;
+    background-color: black;
+    height: 20vh;
+
+ }
+
+ .playField {
+    margin: 0;
+    width: 80vw;
+    height: 80vh;
+    background-color: green;
+
+
+ }
+
+/* 15 x 36 */
+
+.playBoard{
+    position: relative;
+    background-color: #E6B89C;
+    width: 1100px;
+    height: 450px;
+    margin: 30px auto;
+}
+
+.rock {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(https://absorbing-property.glitch.me/rock.svg);
+}
+
+.plant {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(https://absorbing-property.glitch.me/plant.svg);
+}
+
+.character {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(https://absorbing-property.glitch.me/blerf.svg);
+}
