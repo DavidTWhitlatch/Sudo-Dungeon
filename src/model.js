@@ -67,19 +67,70 @@ dragon.currentHealth -= zane.attackDamage();
 console.log(dragon.currentHealth);
 
 const character = {
-    x: 0,
-    y: 0
+    x: 2,
+    y: 2
   };
   
   const rocks = [
+    {x: 0, y: 5},
     {x: 1, y: 1},
-    {x: 2, y: 2},
-    {x: 2, y: 3}
+    {x: 1, y: 2},
+    {x: 1, y: 3},
+    {x: 1, y: 5},
+    {x: 2, y: 3},
+    {x: 3, y: 0},
+    {x: 3, y: 1},
+    {x: 3, y: 2},
+    {x: 3, y: 3},
+    {x: 3, y: 5},
+    {x: 3, y: 6},
+    {x: 4, y: 5},
+    {x: 5, y: 1},
+    {x: 5, y: 2},
+    {x: 5, y: 3},
+    {x: 5, y: 4},
+    {x: 5, y: 5},
+    {x: 6, y: 3},
+    {x: 7, y: 0},
+    {x: 7, y: 1},
+    {x: 7, y: 3},
+    {x: 7, y: 5},
+    {x: 8, y: 1},
+    {x: 8, y: 5},
+    {x: 9, y: 1},
+    {x: 9, y: 2},
+    {x: 9, y: 3},
+    {x: 9, y: 4},
+    {x: 9, y: 5},
+    {x: 11, y: 0},
+    {x: 11, y: 1},
+    {x: 11, y: 2},
+    {x: 11, y: 3},
+    {x: 11, y: 5},
+    {x: 12, y: 5},
+    {x: 13, y: 1},
+    {x: 13, y: 2},
+    {x: 13, y: 3},
+    {x: 13, y: 4},
+    {x: 13, y: 5},
+    {x: 14, y: 1},
+    {x: 14, y: 5},
+    {x: 15, y: 1},
+    {x: 15, y: 2},
+    {x: 15, y: 3},
+    {x: 15, y: 5},
+    {x: 16, y: 1},
+    {x: 16, y: 5},
+    {x: 17, y: 1},
+    {x: 17, y: 3},
+    {x: 17, y: 4},
+    {x: 17, y: 5},
+    {x: 18, y: 3},
   ];
   
   const plants = [
-    {x: 1, y: 2},
-    {x: 3, y: 0}
+    {x: 4, y: 6},
+    {x: 14, y: 2},
   ];
 
   // Check if there is a rock at the provided coordinates.
@@ -98,7 +149,7 @@ const character = {
   // Check if the provided coordinate is within the grid's bounds.
   // Returns a Boolean
   const isCoordinateInGrid = (x, y) => {
-    if (x < 0 || y < 0 || x > 3 || y > 3) {
+    if (x < 0 || y < 0 || x > 18 || y > 6) {
       return false;
     }
     return true;
@@ -243,8 +294,8 @@ const character = {
   const renderBlerf = () => {
       const blerfElement = document.createElement('div');
       blerfElement.className = 'character';
-      blerfElement.style.left = '0px';
-      blerfElement.style.top = '0px';
+      blerfElement.style.left = '100px';
+      blerfElement.style.top = '100px';
       document.querySelector('.playBoard').appendChild(blerfElement);
   };
 renderBlerf();
