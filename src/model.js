@@ -2,11 +2,6 @@
 const fist = .8;
 const shortSword = 1.2;
 
-
-
-
-
-
 class Player {
     constructor(weapon) {
         this.totalHealth = 18;
@@ -14,20 +9,30 @@ class Player {
         this.strength = 5;
         this.hitChance = .8;
         this.weapon = weapon;
+        this.x = 2;
+        this.y = 2;
     }
 
+    //method for attack action
     attackDamage() {
         let hit = Math.random();
         let damage = this.strength * this.weapon;
         if (hit < this.hitChance) {
-            console.log(`Monster took ${damage} damage`);
+            const actionText = document.createElement('div')
+            actionText.innerText += `Monster took ${damage} damage\n`;
+            actionText.className = 'actionText';
+            document.querySelector('footer').prepend(actionText)
             return damage;
         } else {
-            console.log('Missed!');
+            const actionText = document.createElement('div')
+            actionText.innerText += `You missed\n`;
+            actionText.className = 'actionText';
+            document.querySelector('footer').prepend(actionText)
             return 0;
         }
     }
 
+    //Method for drinking a potion
     drinkPot() {
         this.currentHealth += 15;
         if (this.currentHealth > this.totalHealth) {
@@ -38,39 +43,47 @@ class Player {
 }
 
 class Monster {
-    constructor() {
+    constructor(x, y) {
         this.totalHealth = 10;
         this.currentHealth = 10;
         this.strength = 5;
         this.hitChance = .4;
         this.weapon = .8;
+        this.x = x;
+        this.y = y;
     }
-
+    //method for attack action
     attackDamage() {
         let hit = Math.random();
         let damage = this.strength * this.weapon;
         if (hit < this.hitChance) {
-            console.log(`Monster took ${damage} damage`);
+            const actionText = document.createElement('div')
+            actionText.innerText += `You took ${damage} damage\n`;
+            actionText.className = 'actionText';
+            document.querySelector('footer').prepend(actionText)
             return damage;
         } else {
-            console.log('Missed!');
+            const actionText = document.createElement('div')
+            actionText.innerText += `The Monster missed\n`;
+            actionText.className = 'actionText';
+            document.querySelector('footer').prepend(actionText)
             return 0;
         }
     }
 }
 
-const zane = new Player(fist);
+const player = new Player(fist);
 
-const dragon = new Monster();
+const dragon34 = new Monster(3, 4);
+const dragon106 = new Monster(10, 6);
 
-dragon.currentHealth -= zane.attackDamage();
-console.log(dragon.currentHealth);
+const monsters = [
+    dragon34,
+    dragon106
+]
 
-const character = {
-    x: 2,
-    y: 2
-  };
-  
+let portal = 1;
+
   const rocks = [
     {x: 0, y: 5},
     {x: 1, y: 1},
@@ -133,6 +146,13 @@ const character = {
     {x: 14, y: 2},
   ];
 
+  //if win condition is met,
+  //open exit from the level
+  const openPortal = () => {
+    portal = 0;
+    document.querySelector('.portal').style.backgroundColor = 'blue';
+  }
+
   // Check if there is a rock at the provided coordinates.
   // Returns a Boolean
   const isThereARockAt = (x, y) => {
@@ -168,20 +188,90 @@ const character = {
     if (isThereARockAt(x, y)) {
       return false;
     }
+
+    //is there a portal and is it open?
+    if (isThereAPortalAt(x, y) && portal === 1) {
+        return false;
+    }
+    if (isThereAPortalAt(x, y) && portal === 0) {
+        displayWinMessage();
+    }
+
+
+    // If there is a monster at the coordinate, 
+    // the player and monster attack each other.
+    // If the monster is dead, remove it from the DOM
+    if (isThereAMonsterAt(x, y)) {
+        for (let i = 0; i < monsters.length; i++) {
+            const monster = monsters[i];
+            if (monster.x === x && monster.y === y) {
+                combat(monster);
+                if (!isCreatureAlive(monster)) {
+                    monsters.splice(i, 1);
+                    document.querySelector(`#xy${x}${y}`).remove();
+                    const actionText = document.createElement('div')
+                    actionText.innerText += `You killed the monster`;
+                    actionText.className = 'actionText';
+                    document.querySelector('footer').prepend(actionText)
+                }
+                if (!isCreatureAlive(player)) {
+                    displayLoseMessage();
+                    document.querySelector('.player').remove();
+                }
+
+            }
+        }
+        return false;
+    }
     return true;
   };
   
-  // Check if there is a plant at the provided coordinates.
-  // Returns a Boolean
-  const isThereAPlantAt = (x, y) => {
-    // Loop through plants, and check if any plant is at the given point.
-    for (let i = 0; i < plants.length; i++) {
-      const plant = plants[i];
-      if (plant.x === x && plant.y === y) {
+const combat = (monster) => {
+    monster.currentHealth -= player.attackDamage();
+    player.currentHealth -= monster.attackDamage();
+}
+
+  // If a creature's health reaches zero
+  // return boolean
+  const isCreatureAlive = (creature) => {
+      if (creature.currentHealth > 0) {
+          return true;
+        } else{
+            return false;
+        }
+    };
+    
+    // Check if there is a monster at the provided coordinates.
+    // Returns a Boolean
+    const isThereAMonsterAt = (x, y) => {
+        for (let i = 0; i < monsters.length; i++) {
+            const monster = monsters[i];
+            if (monster.x === x && monster.y === y) {
+                return true;
+            }
+        }
+        return false;
+    };
+    
+    // Check if there is a plant at the provided coordinates.
+    // Returns a Boolean
+    const isThereAPlantAt = (x, y) => {
+        // Loop through plants, and check if any plant is at the given point.
+        for (let i = 0; i < plants.length; i++) {
+            const plant = plants[i];
+            if (plant.x === x && plant.y === y) {
         return true;
       }
     }
     return false;
+};
+
+const isThereAPortalAt = (x, y) => {
+    //checks for portal at the given point
+        if (x === 18 && y ===4) {
+            return true;
+          }
+        return false;
   };
   
   // Remove the plant from the global plant array.
@@ -195,68 +285,103 @@ const character = {
     }
   };
   
-  // Display a win message to the player.
-  // Returns nothing
-  const displayWinMessage = () => {
-    // Only display one win message.
-    if (document.querySelector('.win-message') !== null) {
-      return;
-    }
-    const winMessageElement = document.createElement('div');
-    winMessageElement.className = 'win-message';
-    winMessageElement.innerHTML = 'Mmm! Blerf is full!';
-    document.querySelector('.playBoard').appendChild(winMessageElement);
-  };
   
-  // Move the character to an x,y grid coordinate.
+  // Move the player to an x,y grid coordinate.
   // Returns nothing
-  const moveCharacterTo = (x, y) => {
-    const character = document.querySelector('.character');
-    // Multiply the coordinates by 50 because each grid square
+  const movePlayerTo = (x, y) => {
+      const player = document.querySelector('.player');
+      // Multiply the coordinates by 50 because each grid square
+      // is 50x50 pixels in size.
+      player.style.top = (y * 50).toString() + 'px';
+      player.style.left = (x * 50).toString() + 'px';
+      if (isThereAPlantAt(x, y)) {
+          removePlantAt(x, y);
+          renderPlants();
+        }
+        //If the monster are all ded,
+        //open an exit from the level
+        
+        if (monsters.length === 0) {
+            openPortal();
+        }
+    };
+    
+    // Move the player left one tile, if the player can.
+    const moveLeft = () => {
+        if (canMoveTo(player.x - 1, player.y)) {
+            player.x -= 1;
+            movePlayerTo(player.x, player.y);
+        }
+    }
+    
+    // Move the player right one tile, if the player can.
+    const moveRight = () => {
+        if (canMoveTo(player.x + 1, player.y)) {
+            player.x += 1;
+            movePlayerTo(player.x, player.y);
+        }
+    }
+    
+    // Move the player up one tile, if the player can.
+    const moveUp = () => {
+        if (canMoveTo(player.x, player.y - 1)) {
+            player.y -= 1;
+            movePlayerTo(player.x, player.y);
+        }
+    };
+    
+    // Move the player down one tile, if the player can.
+    const moveDown = () => {
+        if (canMoveTo(player.x, player.y + 1)) {
+            player.y += 1;
+            movePlayerTo(player.x, player.y);
+        }
+    };
+    
+    
+    //   Display a win message to the player.
+    //   Returns nothing
+      const displayWinMessage = () => {
+        // Only display one win message.
+        if (document.querySelector('.win-message') !== null) {
+          return;
+        }
+        const winMessageElement = document.createElement('div');
+        winMessageElement.className = 'win-message';
+        winMessageElement.innerHTML = 'You have reached the next level';
+        document.querySelector('.playBoard').appendChild(winMessageElement);
+      };
+    
+    //   Display a win message to the player.
+    //   Returns nothing
+    const displayLoseMessage = () => {
+        // Only display one win message.
+        if (document.querySelector('.lose-message') !== null) {
+          return;
+        }
+        const loseMessageElement = document.createElement('div');
+        loseMessageElement.className = 'lose-message';
+        loseMessageElement.innerHTML = 'You died';
+        document.querySelector('.playBoard').appendChild(loseMessageElement);
+      };
+      
+    //-------------------------------Moving to view.js later-----------------------------
+    
+    
+    // Create rock DOM elements and add them to the playBoard.
+    // portal will be the exit that will open when monsters are ded.
+const renderPortal = () => {
+    const portalElement = document.createElement('div');
+    portalElement.className = 'portal';
+    // Multiply the x,y coordinates by 50 because each grid square
     // is 50x50 pixels in size.
-    character.style.top = (y * 50).toString() + 'px';
-    character.style.left = (x * 50).toString() + 'px';
-    if (isThereAPlantAt(x, y)) {
-      removePlantAt(x, y);
-      renderPlants();
-    }
-    if (plants.length === 0) {
-      displayWinMessage();
-    }
+    portalElement.style.left = (18 * 50).toString() + 'px';
+    portalElement.style.top = (4 * 50).toString() + 'px';
+    document.querySelector('.playBoard').appendChild(portalElement);
+    
   };
-  
-  // Move the character left one tile, if Blerf can.
-  const moveLeft = () => {
-    if (canMoveTo(character.x - 1, character.y)) {
-      character.x -= 1;
-      moveCharacterTo(character.x, character.y);
-    }
-  }
-  
-  // Move the character right one tile, if Blerf can.
-  const moveRight = () => {
-    if (canMoveTo(character.x + 1, character.y)) {
-      character.x += 1;
-      moveCharacterTo(character.x, character.y);
-    }
-  }
-  
-  // Move the character up one tile, if Blerf can.
-  const moveUp = () => {
-    if (canMoveTo(character.x, character.y - 1)) {
-      character.y -= 1;
-      moveCharacterTo(character.x, character.y);
-    }
-  };
-  
-  // Move the character down one tile, if Blerf can.
-  const moveDown = () => {
-    if (canMoveTo(character.x, character.y + 1)) {
-      character.y += 1;
-      moveCharacterTo(character.x, character.y);
-    }
-  };
-  
+  renderPortal();
+
   // Create rock DOM elements and add them to the playBoard.
   const renderRocks = () => {
     for (let i = 0; i < rocks.length; i++) {
@@ -272,6 +397,22 @@ const character = {
   };
   renderRocks();
   
+  // Create monster DOM elements and add them to the playBoard.
+  const renderMonsters = () => {
+    for (let i = 0; i < monsters.length; i++) {
+      const monster = monsters[i];
+      const monsterElement = document.createElement('div');
+      monsterElement.className = 'monster';
+      monsterElement.id = `xy${monster.x}${monster.y}`;
+      // Multiply the x,y coordinates by 50 because each grid square
+      // is 50x50 pixels in size.
+      monsterElement.style.left = (monster.x * 50).toString() + 'px';
+      monsterElement.style.top = (monster.y * 50).toString() + 'px';
+      document.querySelector('.playBoard').appendChild(monsterElement);
+    }
+  };
+  renderMonsters();
+
   // Create plant DOM elements and add them to the playBoard.
   const renderPlants = () => {
     // Remove plants if any are on the grid.
@@ -290,15 +431,18 @@ const character = {
     }
   };
   renderPlants();
-  
-  const renderBlerf = () => {
-      const blerfElement = document.createElement('div');
-      blerfElement.className = 'character';
-      blerfElement.style.left = '100px';
-      blerfElement.style.top = '100px';
-      document.querySelector('.playBoard').appendChild(blerfElement);
+
+  // Create plant DOM elements and add them to the playBoard.
+  const renderPlayer = () => {
+      const playerElement = document.createElement('div');
+      playerElement.className = 'player';
+      // Multiply the x,y coordinates by 50 because each grid square
+      // is 50x50 pixels in size.
+      playerElement.style.left = (player.x * 50).toString() + 'px';
+      playerElement.style.top = (player.y * 50).toString() + 'px';
+      document.querySelector('.playBoard').appendChild(playerElement);
   };
-renderBlerf();
+  renderPlayer();
 
   // Add an event listener for when the user presses keys.
   document.body.addEventListener('keydown', evt => {
@@ -308,7 +452,7 @@ renderBlerf();
     if ([37, 38, 39, 40].includes(keyCode)) {
       evt.preventDefault();
     }
-    // Attempt to move the character in the direction 
+    // Attempt to move the player in the direction 
     switch (keyCode) {
       case 37:
         moveLeft();

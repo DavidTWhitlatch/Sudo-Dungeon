@@ -72,6 +72,9 @@ div {
     bottom:0;
     background-color: black;
     height: 20vh;
+    width: 100vw;
+    transform: rotate(180deg);
+    direction: rtl;
 
  }
 
@@ -79,12 +82,12 @@ div {
     margin: 0;
     width: 80vw;
     height: 80vh;
-    background-color: green;
+    background-color: black;
 
 
  }
 
-/* 15 x 36 */
+/* 7 x 18 */
 
 .playBoard{
     position: relative;
@@ -108,9 +111,58 @@ div {
     background-image: url(https://absorbing-property.glitch.me/plant.svg);
 }
 
-.character {
+.player {
     position: absolute;
     width: 50px;
     height: 50px;
     background-image: url(https://absorbing-property.glitch.me/blerf.svg);
+}
+
+.monster {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(https://absorbing-property.glitch.me/blerf.svg);
+}
+
+.portal {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: grey;
+    /* background-image: url(https://absorbing-property.glitch.me/blerf.svg); */
+}
+
+.win-message {
+    position: absolute;
+    width: 1050px;
+    height: 450px;
+    top: -50px;
+    left: -50px;
+    background-color: rgba(255,255,255,0.75);
+    font-family: 'Inconsolata', monospace;
+    text-align: center;
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.lose-message {
+    position: absolute;
+    width: 1050px;
+    height: 450px;
+    top: -50px;
+    left: -50px;
+    background-color: rgba(0, 0, 0, 0.75);
+    font-family: 'Inconsolata', monospace;
+    text-align: center;
+    color: rgba(255, 0, 0, 0.75);
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.actionText {
+    margin: 0;
+    transform: rotate(180deg);
+    direction: rtl;
+    text-align: left;
 }
