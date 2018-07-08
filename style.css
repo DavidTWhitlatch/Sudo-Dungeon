@@ -57,6 +57,7 @@ div {
  }
 
  aside {
+    font-family: 'Press Start 2P', cursive;
     color: white;
     position: fixed;
     top: 0px;
@@ -64,9 +65,11 @@ div {
     background-color:black;
     width: 20vw;
     height: 80vh;
+    padding: 0;
  }
 
  footer {
+    font-family: 'Press Start 2P', cursive;
     color: white;
     position:fixed;
     bottom:0;
@@ -75,8 +78,52 @@ div {
     width: 100vw;
     transform: rotate(180deg);
     direction: rtl;
-
+    padding: 50px;
+    background-image: url(img/footerBackground.png);
+    background-size: auto;
+    background-position: center;
  }
+
+ .actionField{
+     margin: 0;
+     padding: 0;
+ }
+
+.hpLine {
+    margin: 0;
+    height: 20px;
+    width: 100%;
+    padding: 0;
+    /* background-color: red; */
+}
+
+.totalHP {
+    float: right;
+    margin: 0;
+    height: 20px;
+    width: 55%;
+    background-color: grey;
+    /* display: inline-block; */
+ }
+
+.hpText {
+    height: 20px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+
+
+}
+
+.currentHP {
+    float: left;
+    margin: 0;
+    height: 20px;
+    width: 100%;
+    background-color: #8ae234;
+    display: inline-block;
+}
 
  .playField {
     margin: 0;
@@ -91,7 +138,7 @@ div {
 
 .playBoard{
     position: relative;
-    background-color: #E6B89C;
+    background-image: url(img/gameBoard.png);
     width: 1050px;
     height: 450px;
     margin: 10vh auto 10vh auto;
@@ -101,28 +148,28 @@ div {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url(https://absorbing-property.glitch.me/rock.svg);
+    /* background-image: url(https://absorbing-property.glitch.me/rock.svg); */
 }
 
 .plant {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url(https://absorbing-property.glitch.me/plant.svg);
+    background-image: url(img/treasure.png);
 }
 
 .player {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url(https://absorbing-property.glitch.me/blerf.svg);
+    background-image: url(img/player.png);
 }
 
 .monster {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url(https://absorbing-property.glitch.me/blerf.svg);
+    background-image: url(img/monster.png);
 }
 
 .portal {
