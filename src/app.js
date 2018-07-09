@@ -149,7 +149,6 @@ const treasures = [
 
 const giveItem = () => {
   let itemIndex = Math.random();
-  console.log(itemIndex)
   if (itemIndex < .7) {
       player.inventory[0].potion += 1;
       const potionBox = document.querySelector('.potions');
@@ -393,7 +392,6 @@ const inventoryEvent = (evt) => {
       break;
       case 27:
       closeInventory();
-      console.log('closeInventory')
       break;
     }
 }
