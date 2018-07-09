@@ -11,6 +11,9 @@ class Player {
     this.weapon = weapon;
     this.x = 2;
     this.y = 2;
+    this.inventory = [
+    {potion: 1}
+    ]
   }
 
   //method for attack action
@@ -18,25 +21,28 @@ class Player {
     let hit = Math.random();
     let damage = this.strength * this.weapon;
     if (hit < this.hitChance) {
-      const actionText = document.createElement('div')
-      actionText.innerText += `Monster took ${damage} damage`;
-      actionText.className = 'actionText';
-      document.querySelector('.actionField').prepend(actionText)
+      addActionText(`Monster took ${damage} damage`);
       return damage;
     } else {
-      const actionText = document.createElement('div')
-      actionText.innerText += `You missed`;
-      actionText.className = 'actionText';
-      document.querySelector('.actionField').prepend(actionText)
+      addActionText(`You missed`);
+
       return 0;
     }
   }
 
   //Method for drinking a potion
   drinkPot() {
-    this.currentHealth += 15;
-    if (this.currentHealth > this.totalHealth) {
-      this.currentHealth = this.totalHealth;
+    if (this.inventory[0].potion > 0) {
+      this.currentHealth += 15;
+      if (this.currentHealth > this.totalHealth) {
+        this.currentHealth = this.totalHealth;
+      }
+      this.inventory[0].potion -= 1;
+      const potionBox = document.querySelector('.potions');
+      potionBox.innerText = `P: potions (${player.inventory[0].potion})`;
+      updateHPStats(this);
+    } else {
+      addActionText('No potions left')
     }
   }
 
@@ -46,9 +52,9 @@ class Monster {
   constructor(x, y) {
     this.totalHealth = 10;
     this.currentHealth = 10;
-    this.strength = 4;
+    this.strength = 5;
     this.hitChance = .4;
-    this.weapon = .8;
+    this.weapon = .6;
     this.x = x;
     this.y = y;
   }
@@ -57,22 +63,14 @@ class Monster {
     let hit = Math.random();
     let damage = this.strength * this.weapon;
     if (hit < this.hitChance) {
-      const actionText = document.createElement('div')
-      actionText.innerText += `You took ${damage} damage`;
-      actionText.className = 'actionText';
-      document.querySelector('.actionField').prepend(actionText);
+      addActionText(`You took ${damage} damage`);
       return damage;
     } else {
-      const actionText = document.createElement('div')
-      actionText.innerText += `The monster missed`;
-      actionText.className = 'actionText';
-      document.querySelector('.actionField').prepend(actionText)
+      addActionText(`The monster missed`);
       return 0;
     }
   }
 }
-
-
 
 //set class instances and variables needed
 const player = new Player(fist);
@@ -87,7 +85,7 @@ const monsters = [
 ]
 let portal = 1;
 
-const rocks = [
+const walls = [
   {x: 0, y: 5},
   {x: 1, y: 1},
   {x: 1, y: 2},
@@ -144,25 +142,42 @@ const rocks = [
   {x: 18, y: 3},
 ];
 
-const plants = [
+const treasures = [
   {x: 4, y: 6},
   {x: 14, y: 2},
 ];
+
+const giveItem = () => {
+  let itemIndex = Math.random();
+  console.log(itemIndex)
+  if (itemIndex < .7) {
+      player.inventory[0].potion += 1;
+      const potionBox = document.querySelector('.potions');
+      potionBox.innerText = `P: potions (${player.inventory[0].potion})`;      
+      addActionText('You received a potion');
+  }
+  else if (itemIndex >= .7) {
+      player.weapon = shortSword;
+      addActionText('You obtained a short sword, +.4 damage multiplier');
+      currentWeapon = document.querySelector('.weapon');
+      currentWeapon.innerText = 'weapon: short sword';
+  }
+}
 
 //if win condition is met,
 //open exit from the level
 const openPortal = () => {
   portal = 0;
-  document.querySelector('.portal').style.backgroundColor = 'blue';
+  document.querySelector('.portal').style.backgroundImage = "url('img/openPortal.gif')";
 }
 
-// Check if there is a rock at the provided coordinates.
+// Check if there is a wall at the provided coordinates.
 // Returns a Boolean
-const isThereARockAt = (x, y) => {
-  // Loop through rocks, and check if any rock is at the given point.
-  for (let i = 0; i < rocks.length; i++) {
-    const rock = rocks[i];
-    if (rock.x === x && rock.y === y) {
+const isThereAWallAt = (x, y) => {
+  // Loop through walls, and check if any wall is at the given point.
+  for (let i = 0; i < walls.length; i++) {
+    const wall = walls[i];
+    if (wall.x === x && wall.y === y) {
       return true;
     }
   }
@@ -186,9 +201,9 @@ const canMoveTo = (x, y) => {
   if (!isCoordinateInGrid(x, y)) {
     return false;
   }
-  // If there is a rock at the coordinate,
+  // If there is a wall at the coordinate,
   // the player can't move to it.
-  if (isThereARockAt(x, y)) {
+  if (isThereAWallAt(x, y)) {
     return false;
   }
 
@@ -212,10 +227,7 @@ const canMoveTo = (x, y) => {
         if (!isCreatureAlive(monster)) {
           monsters.splice(i, 1);
           document.querySelector(`#xy${x}${y}`).remove();
-          const actionText = document.createElement('div')
-          actionText.innerText += `You killed the monster`;
-          actionText.className = 'actionText';
-          document.querySelector('.actionField').prepend(actionText)
+          addActionText(`You killed the monster`);
         }
         if (!isCreatureAlive(player)) {
           displayLoseMessage();
@@ -234,7 +246,7 @@ const canMoveTo = (x, y) => {
 const combat = (monster) => {
   monster.currentHealth -= player.attackDamage();
   player.currentHealth -= monster.attackDamage();
-  renderHPStats(player);
+  updateHPStats(player);
 }
 
 // If a creature's health reaches zero
@@ -259,13 +271,14 @@ const isThereAMonsterAt = (x, y) => {
   return false;
 };
 
-// Check if there is a plant at the provided coordinates.
+// Check if there is a treasure at the provided coordinates.
 // Returns a Boolean
-const isThereAPlantAt = (x, y) => {
-  // Loop through plants, and check if any plant is at the given point.
-  for (let i = 0; i < plants.length; i++) {
-    const plant = plants[i];
-    if (plant.x === x && plant.y === y) {
+const isThereATreasureAt = (x, y) => {
+  // Loop through treasures, and check if any treasure is at the given point.
+  for (let i = 0; i < treasures.length; i++) {
+    const treasure = treasures[i];
+    if (treasure.x === x && treasure.y === y) {
+      giveItem();
       return true;
     }
   }
@@ -280,13 +293,14 @@ const isThereAPortalAt = (x, y) => {
   return false;
 };
 
-// Remove the plant from the global plant array.
+// Remove the treasure from the global treasure array.
 // Returns nothing
-const removePlantAt = (x, y) => {
-  for (let i = 0; i < plants.length; i++) {
-    const plant = plants[i];
-    if (plant.x === x && plant.y === y) {
-      plants.splice(i, 1);
+const removeTreasureAt = (x, y) => {
+  for (let i = 0; i < treasures.length; i++) {
+    const treasure = treasures[i];
+    if (treasure.x === x && treasure.y === y) {
+      treasures.splice(i, 1);
+      document.querySelector(`#tr${x}${y}`).remove();
     }
   }
 };
@@ -300,9 +314,9 @@ const movePlayerTo = (x, y) => {
   // is 50x50 pixels in size.
   player.style.top = (y * 50).toString() + 'px';
   player.style.left = (x * 50).toString() + 'px';
-  if (isThereAPlantAt(x, y)) {
-    removePlantAt(x, y);
-    renderPlants();
+  if (isThereATreasureAt(x, y)) {
+    removeTreasureAt(x, y);
+    // renderTreasures();
   }
   //If the monster are all ded,
   //open an exit from the level
@@ -371,37 +385,104 @@ const displayLoseMessage = () => {
   document.querySelector('.playBoard').appendChild(loseMessageElement);
 };
 
+const inventoryEvent = (evt) => {
+  const keyCode = evt.keyCode;
+    switch (keyCode) {
+      case 80:
+      player.drinkPot();
+      break;
+      case 27:
+      closeInventory();
+      console.log('closeInventory')
+      break;
+    }
+}
+
+const openInventory = () => {
+  inventoryBox = document.querySelector('.inventory');
+  inventoryBox.style.visibility = 'visible';
+  document.body.addEventListener('keydown', inventoryEvent);
+  console.log('openInventory')
+}
+
+const closeInventory = () => {
+  inventoryBox = document.querySelector('.inventory');
+  inventoryBox.style.visibility = 'hidden';
+  document.body.removeEventListener('keydown', inventoryEvent)
+}
+
 //-------------------------------Moving to view.js later-----------------------------
 
-//append stats to aside
-const renderStats = () => {
+//render stats in aside
+const renderHPStats = () => {
   const hpLine = document.createElement('div');
-  hpLine.className = 'hpLine';
+  hpLine.className = 'statLine';
   document.querySelector('aside').appendChild(hpLine);
   const hpText = document.createElement('div');
   hpText.className = 'hpText';
   hpText.innerText = `Health: ${player.currentHealth}/${player.totalHealth}`;
-  document.querySelector('.hpLine').appendChild(hpText);
+  document.querySelector('.statLine').appendChild(hpText);
   const totalHP = document.createElement('span');
   totalHP.className = 'totalHP';
-  document.querySelector('.hpLine').appendChild(totalHP);
+  document.querySelector('.statLine').appendChild(totalHP);
   const currentHP = document.createElement('span');
   currentHP.className = 'currentHP';
   document.querySelector('.totalHP').appendChild(currentHP);
 }
-renderStats();
+renderHPStats();
 
 
-const renderHPStats = (creature) => {
+
+//update HP text and health bar after taking damage
+const updateHPStats = (creature) => {
   const currentHPBar = document.querySelector(".currentHP");
   currentHPBar.style.width = ((creature.currentHealth / creature.totalHealth)*100).toString() + "%";
   const currentHPText = document.querySelector(".hpText");
   currentHPText.innerText = `Health: ${creature.currentHealth}/${creature.totalHealth}`;
-  debugger;
-
 }
 
-// Create rock DOM elements and add them to the playBoard.
+//render strength stat in aside
+const renderStrengthStat = () => {
+  const strengthStat = document.createElement('div');
+  strengthStat.className = 'statLine';
+  strengthStat.innerText = `Strength: ${player.strength}`;
+  document.querySelector('aside').appendChild(strengthStat);
+}
+renderStrengthStat();
+
+//render weapon stat in aside
+const renderCurrentWeapon = () => {
+  const currentWeapon = document.createElement('div');
+  currentWeapon.className = 'statLine';
+  currentWeapon.classList.add('weapon');
+  if (player.weapon === .8) {
+    currentWeapon.innerText = 'weapon: bare fists';
+  } else if (player.weapon === 1.2) {
+    currentWeapon.innerText = 'weapon: short sword';
+  }
+  document.querySelector('aside').appendChild(currentWeapon);
+}
+renderCurrentWeapon();
+
+//render option to open inventory in aside
+const buttonOptions = () => {
+  const inventorybutton = document.createElement('div');
+  inventorybutton.className = 'statLine';
+  inventorybutton.innerText = 'I: open inventory'
+  document.querySelector('aside').appendChild(inventorybutton);
+}
+buttonOptions();
+
+
+//Add text to the footer action field
+const addActionText = (string) => {
+  const actionText = document.createElement('div')
+  actionText.innerText += `${string}`;
+  actionText.className = 'actionText';
+  document.querySelector('.actionField').prepend(actionText)
+}
+
+// Create wall DOM elements and add them to the playBoard.
 // portal will be the exit that will open when monsters are ded.
 const renderPortal = () => {
   const portalElement = document.createElement('div');
@@ -411,24 +492,24 @@ const renderPortal = () => {
   portalElement.style.left = (18 * 50).toString() + 'px';
   portalElement.style.top = (4 * 50).toString() + 'px';
   document.querySelector('.playBoard').appendChild(portalElement);
-
+  
 };
 renderPortal();
 
-// Create rock DOM elements and add them to the playBoard.
-const renderRocks = () => {
-  for (let i = 0; i < rocks.length; i++) {
-    const rock = rocks[i];
-    const rockElement = document.createElement('div');
-    rockElement.className = 'rock';
+// Create wall DOM elements and add them to the playBoard.
+const renderWalls = () => {
+  for (let i = 0; i < walls.length; i++) {
+    const wall = walls[i];
+    const wallElement = document.createElement('div');
+    wallElement.className = 'wall';
     // Multiply the x,y coordinates by 50 because each grid square
     // is 50x50 pixels in size.
-    rockElement.style.left = (rock.x * 50).toString() + 'px';
-    rockElement.style.top = (rock.y * 50).toString() + 'px';
-    document.querySelector('.playBoard').appendChild(rockElement);
+    wallElement.style.left = (wall.x * 50).toString() + 'px';
+    wallElement.style.top = (wall.y * 50).toString() + 'px';
+    document.querySelector('.playBoard').appendChild(wallElement);
   }
 };
-renderRocks();
+renderWalls();
 
 // Create monster DOM elements and add them to the playBoard.
 const renderMonsters = () => {
@@ -446,26 +527,27 @@ const renderMonsters = () => {
 };
 renderMonsters();
 
-// Create plant DOM elements and add them to the playBoard.
-const renderPlants = () => {
-  // Remove plants if any are on the grid.
-  const plantElements = document.querySelectorAll('.plant');
-  for (let i = 0; i < plantElements.length; i++) {
-    plantElements[i].remove();
+// Create treasure DOM elements and add them to the playBoard.
+const renderTreasures = () => {
+  // Remove treasures if any are on the grid.
+  const treasureElements = document.querySelectorAll('.treasure');
+  for (let i = 0; i < treasureElements.length; i++) {
+    treasureElements[i].remove();
   }
-
-  for (let i = 0; i < plants.length; i++) {
-    const plant = plants[i];
-    const plantElement = document.createElement('div');
-    plantElement.className = 'plant';
-    plantElement.style.left = (plant.x * 50).toString() + 'px';
-    plantElement.style.top = (plant.y * 50).toString() + 'px';
-    document.querySelector('.playBoard').appendChild(plantElement);
+  
+  for (let i = 0; i < treasures.length; i++) {
+    const treasure = treasures[i];
+    const treasureElement = document.createElement('div');
+    treasureElement.className = 'treasure';
+    treasureElement.id = `tr${treasure.x}${treasure.y}`;
+    treasureElement.style.left = (treasure.x * 50).toString() + 'px';
+    treasureElement.style.top = (treasure.y * 50).toString() + 'px';
+    document.querySelector('.playBoard').appendChild(treasureElement);
   }
 };
-renderPlants();
+renderTreasures();
 
-// Create plant DOM elements and add them to the playBoard.
+// Create player DOM elements and add them to the playBoard.
 const renderPlayer = () => {
   const playerElement = document.createElement('div');
   playerElement.className = 'player';
@@ -476,6 +558,22 @@ const renderPlayer = () => {
   document.querySelector('.playBoard').appendChild(playerElement);
 };
 renderPlayer();
+
+//render inventory field and hide it
+const inventory = () => {
+  const inventoryBox = document.createElement('div');
+  inventoryBox.className = 'inventory';
+  inventoryBox.style.visibility = 'hidden';
+  document.querySelector('.playBoard').appendChild(inventoryBox);
+  const potionBox = document.createElement('div');
+  potionBox.className = 'potions';
+  potionBox.innerText = `P: potions (${player.inventory[0].potion})`;
+  document.querySelector('.inventory').appendChild(potionBox);
+  const escBox = document.createElement('div');
+  escBox.innerText = `esc: close inventory`;
+  document.querySelector('.inventory').appendChild(escBox);
+}
+inventory();
 
 // Add an event listener for when the user presses keys.
 document.body.addEventListener('keydown', evt => {
@@ -498,6 +596,9 @@ document.body.addEventListener('keydown', evt => {
     break;
     case 40:
     moveDown();
+    break;
+    case 73:
+    openInventory();
     break;
   }
 });
