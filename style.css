@@ -3,10 +3,21 @@ body {
 }
 
 header {
+    /* height: 300px; */
+    padding: 1px;
+    font-size: 50px;
     border-bottom: 2px solid black;
+    background-image: url('img/stoneBackground.png');
+    color: black;
+    text-shadow: 2px 2px 2px white;
 }
 
 h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 0 100px;
     text-align: center;
 }
 
@@ -97,7 +108,7 @@ div {
     margin: 0;
     height: 20px;
     width: 100%;
-    padding: 25px 0 0 0;
+    padding: 25px 10px;
     display: inline-block;
 }
 
@@ -131,6 +142,7 @@ div {
     width: 80vw;
     height: 80vh;
     background-color: black;
+    background-image: url(img/stoneBackground.png)
 
 
  }
@@ -142,7 +154,7 @@ div {
     background-image: url(img/gameBoard.png);
     width: 1050px;
     height: 450px;
-    margin: 10vh auto 10vh auto;
+    margin: 5vh auto 5vh auto;
 }
 
 .wall {
@@ -186,7 +198,7 @@ div {
     top: -50px;
     left: -50px;
     background-color: rgba(255,255,255,0.75);
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Press Start 2P', cursive;
     text-align: center;
     font-weight: 700;
     font-size: 4rem;
@@ -198,13 +210,12 @@ div {
     height: 450px;
     top: -50px;
     left: -50px;
-    background-color: rgba(0, 0, 0, 0.75);
-    font-family: 'Inconsolata', monospace;
+    /* background-color: rgba(0, 0, 0, 0.75); */
+    background-image: url('img/scrollBackground.png');
+    font-family: cursive;
     text-align: left;
     font-weight: 700;
     font-size: 2em;
-    color: white;
-
 }
 
 .lose-message {
