@@ -3,7 +3,6 @@ body {
 }
 
 header {
-    /* height: 300px; */
     padding: 1px;
     font-size: 50px;
     border-bottom: 2px solid black;
@@ -112,6 +111,23 @@ div {
     display: inline-block;
 }
 
+.statLineBreak {
+    border-top: 2px solid white;
+    margin: 0;
+    width: 100%;
+    display: inline-block;
+}
+
+.buttonCenter {
+    margin: 0;
+    height: 20px;
+    width: 100%;
+    padding: 0px 10px;
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+}
+
 .totalHP {
     float: right;
     margin: 0;
@@ -146,8 +162,6 @@ div {
 
 
  }
-
-/* 7 x 18 */
 
 .playBoard{
     position: relative;
@@ -211,7 +225,6 @@ div {
     height: 450px;
     top: -50px;
     left: -50px;
-    /* background-color: rgba(0, 0, 0, 0.75); */
     background-image: url('img/scrollBackground.png');
     font-family: cursive;
     text-align: left;

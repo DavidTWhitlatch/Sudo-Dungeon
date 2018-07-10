@@ -462,6 +462,26 @@ const renderCurrentWeapon = () => {
 }
 renderCurrentWeapon();
 
+const statLineBreak = document.createElement('div');
+statLineBreak.className = 'statLineBreak';
+document.querySelector('aside').appendChild(statLineBreak);
+
+const renderMovement = () => {
+  const movementText = document.createElement('div');
+  movementText.className = 'statLine';
+  movementText.innerText = 'Movement/Combat:';
+  document.querySelector('aside').appendChild(movementText);
+  const movementUp = document.createElement('div');
+  movementUp.className = 'buttonCenter';
+  movementUp.innerText = '\u2191';
+  document.querySelector('aside').appendChild(movementUp);
+  const movementButtons = document.createElement('div');
+  movementButtons.className = 'buttonCenter';
+  movementButtons.innerText = '\u2190 \u2193 \u2192';
+  document.querySelector('aside').appendChild(movementButtons);
+}
+renderMovement();
+
 //render option to open inventory in aside
 const buttonOptions = () => {
   const inventorybutton = document.createElement('div');
