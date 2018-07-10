@@ -45,7 +45,6 @@ class Player {
       addActionText('No potions left')
     }
   }
-
 }
 
 class Monster {
@@ -147,6 +146,7 @@ const treasures = [
   {x: 14, y: 2},
 ];
 
+//item received when treasure is picked up
 const giveItem = () => {
   let itemIndex = Math.random();
   if (itemIndex < .7) {
@@ -168,6 +168,13 @@ const giveItem = () => {
 const openPortal = () => {
   portal = 0;
   document.querySelector('.portal').style.backgroundImage = "url('img/openPortal.gif')";
+}
+
+//function to handle combat action
+const combat = (monster) => {
+  monster.currentHealth -= player.attackDamage();
+  player.currentHealth -= monster.attackDamage();
+  updateHPStats(player);
 }
 
 // Check if there is a wall at the provided coordinates.
@@ -214,7 +221,6 @@ const canMoveTo = (x, y) => {
     displayWinMessage();
   }
 
-
   // If there is a monster at the coordinate,
   // the player and monster attack each other.
   // If the monster is dead, remove it from the DOM
@@ -239,14 +245,6 @@ const canMoveTo = (x, y) => {
   }
   return true;
 };
-
-
-//function to handle combat action
-const combat = (monster) => {
-  monster.currentHealth -= player.attackDamage();
-  player.currentHealth -= monster.attackDamage();
-  updateHPStats(player);
-}
 
 // If a creature's health reaches zero
 // return boolean
@@ -304,7 +302,6 @@ const removeTreasureAt = (x, y) => {
   }
 };
 
-
 // Move the player to an x,y grid coordinate.
 // Returns nothing
 const movePlayerTo = (x, y) => {
@@ -319,7 +316,6 @@ const movePlayerTo = (x, y) => {
   }
   //If the monster are all ded,
   //open an exit from the level
-
   if (monsters.length === 0) {
     openPortal();
   }
@@ -384,6 +380,8 @@ const displayLoseMessage = () => {
   document.querySelector('.playBoard').appendChild(loseMessageElement);
 };
 
+
+//opening and closing inventory functions with event listeners
 const inventoryEvent = (evt) => {
   const keyCode = evt.keyCode;
     switch (keyCode) {
@@ -429,8 +427,6 @@ const renderHPStats = () => {
 }
 renderHPStats();
 
-
-
 //update HP text and health bar after taking damage
 const updateHPStats = (creature) => {
   const currentHPBar = document.querySelector(".currentHP");
@@ -462,10 +458,12 @@ const renderCurrentWeapon = () => {
 }
 renderCurrentWeapon();
 
+//line break separating stats from inpot options in aside
 const statLineBreak = document.createElement('div');
 statLineBreak.className = 'statLineBreak';
 document.querySelector('aside').appendChild(statLineBreak);
 
+//adding movement buttons to aside
 const renderMovement = () => {
   const movementText = document.createElement('div');
   movementText.className = 'statLine';
