@@ -4,7 +4,7 @@ The goal of Sudo Dungeon was to make a very traditional dungeon crawler game tha
 To accomplish this, I wanted to keep an aside container that would display all of the options that a player could take. Additionally there is action text at the bottom of the screen to inform the player of everything that is happening in the game. My initial rough wireframes looked as so:
 ![wireframes](https://github.com/DavidTWhitlatch/Sudo-Dungeon/blob/master/img/wireframes.jpg "wireframes")
 
-###ESLint AirBNB Style Guide
+### ESLint AirBNB Style Guide
 
 ![Screen Shot](https://github.com/DavidTWhitlatch/Sudo-Dungeon/blob/master/img/Screen%20Shot.png "Screen Shot")
 
