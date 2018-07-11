@@ -86,7 +86,7 @@ const updateHPStats = (creature) => {
 ```
 
 ## Post Project Plans
-- while researching for this project I found open source code for a random maze generator (https://www.khanacademy.org/computer-programming/maze-generator/939110892). I would love to pick it apart and see if I could integrate it into my own code. If not, then I would like to make my own maze generator to handle the map rendering. I know that i will need to adjust how the map background is styled and also how the portal function works.
+- While researching for this project I found open source code for a random maze generator (https://www.khanacademy.org/computer-programming/maze-generator/939110892). I would love to pick it apart and see if I could integrate it into my own code. If not, then I would like to make my own maze generator to handle the map rendering. I know that i will need to adjust how the map background is styled and also how the portal function works.
 - I would also like to keep adding more items and a variety of monsters to scatter through out the maze.
 - I also have plans to create multiple classes for the player to select at game start
 
