@@ -1,6 +1,6 @@
 # Sudo-Dungeon
-## how the game functions
-The goal of Sudo Dungeon was to make a very traditional dungeon crawler game that is easy to use and understand. I did not want to sacrifice features or complexity but a player shouldnt need to look up rules or guides to be able to play the game.
+## How the game functions
+The goal of Sudo Dungeon was to make a very traditional dungeon crawler game that is easy to use and understand. I did not want to sacrifice features or complexity but a player shouldn't need to look up rules or guides to be able to play the game.
 To accomplish this, I wanted to keep an aside container that would display all of the options that a player could take. Additionally there is action text at the bottom of the screen to inform the player of everything that is happening in the game. My initial rough wireframes looked as so:
 ![wireframes](https://github.com/DavidTWhitlatch/Sudo-Dungeon/blob/master/img/wireframes.jpg "wireframes")
 
@@ -49,7 +49,7 @@ There are three overlays that the player can reach. They can open an 'Inventory'
 The program can be run from the index.html file in the root directory. Please feel free to fork, clone and enjoy.
 
 ## Difficulties
-Two particular issues stand out in my mind when looking back on this project. the first being the action text in the footer. As the player continues to play the game, they will accumulate more action logs. adding a simple scroll field seemed obvious to me but this would require the player to constantly scroll down the footer to see the newest logs. I did not know of any way to auto scroll to the bottom. The solution I came up with was to rotate the footer 180deg and then  prepend each child text div and rotate them 180deg again. This keeps the scroll field scrolled to the bottom and adds new combat text like normal. The effect is similar to the way a chat scroll funtions.
+Two particular issues stand out in my mind when looking back on this project. The first being the action text in the footer. As the player continues to play the game, they will accumulate more action logs. Adding a simple scroll field seemed obvious to me but this would require the player to constantly scroll down the footer to see the newest logs. I did not know of any way to auto scroll to the bottom. The solution I came up with was to rotate the footer 180deg and then  prepend each child text div and rotate them 180deg again. This keeps the scroll field scrolled to the bottom and adds new combat text like normal. The effect is similar to the way a chat scroll funtions.
 ```
 footer {
     font-family: 'Press Start 2P', cursive;
