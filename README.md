@@ -90,5 +90,5 @@ const updateHPStats = (creature) => {
 - I would also like to keep adding more items and a variety of monsters to scatter through out the maze.
 - I also have plans to create multiple classes for the player to select at game start
 
-## resources used
+## Resources used
 I referenced https://wakeful-baritone.glitch.me/ to kick start my game logic with an alternative to collision detection. I also reference https://www.w3schools.com/, https://developer.mozilla.org/en-US/ and https://stackoverflow.com/ for syntax issues and coding cheat sheets.
