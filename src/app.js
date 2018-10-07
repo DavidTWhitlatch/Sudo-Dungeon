@@ -1,5 +1,5 @@
-/* List of Weapons*/
-const fist = .8;
+// List of Weapons
+const fist = 0.8;
 const shortSword = 1.2;
 
 class Player {
@@ -7,30 +7,29 @@ class Player {
     this.totalHealth = 18;
     this.currentHealth = 18;
     this.strength = 5;
-    this.hitChance = .8;
+    this.hitChance = 0.8;
     this.weapon = weapon;
     this.x = 2;
     this.y = 2;
     this.inventory = [
-    {potion: 1}
-    ]
+      { potion: 1 },
+    ];
   }
 
-  //method for attack action
+  // method for attack action
   attackDamage() {
-    let hit = Math.random();
-    let damage = this.strength * this.weapon;
+    const hit = Math.random();
+    const damage = this.strength * this.weapon;
     if (hit < this.hitChance) {
       addActionText(`Monster took ${damage} damage`);
       return damage;
     } else {
       addActionText(`You missed`);
-
       return 0;
     }
   }
 
-  //Method for drinking a potion
+  // Method for drinking a potion
   drinkPot() {
     if (this.inventory[0].potion > 0) {
       this.currentHealth += 15;
@@ -57,10 +56,11 @@ class Monster {
     this.x = x;
     this.y = y;
   }
-  //method for attack action
+
+  // method for attack action
   attackDamage() {
-    let hit = Math.random();
-    let damage = this.strength * this.weapon;
+    const hit = Math.random();
+    const damage = this.strength * this.weapon;
     if (hit < this.hitChance) {
       addActionText(`You took ${damage} damage`);
       return damage;
@@ -71,7 +71,7 @@ class Monster {
   }
 }
 
-//set class instances and variables needed
+// set class instances and variables needed
 const player = new Player(fist);
 const dragon34 = new Monster(3, 4);
 const dragon106 = new Monster(10, 6);
@@ -80,108 +80,108 @@ const dragon80 = new Monster(8, 0);
 const monsters = [
   dragon34,
   dragon106,
-  dragon80
-]
+  dragon80,
+];
 let portal = 1;
 
 const walls = [
-  {x: 0, y: 5},
-  {x: 1, y: 1},
-  {x: 1, y: 2},
-  {x: 1, y: 3},
-  {x: 1, y: 5},
-  {x: 2, y: 3},
-  {x: 3, y: 0},
-  {x: 3, y: 1},
-  {x: 3, y: 2},
-  {x: 3, y: 3},
-  {x: 3, y: 5},
-  {x: 3, y: 6},
-  {x: 4, y: 5},
-  {x: 5, y: 1},
-  {x: 5, y: 2},
-  {x: 5, y: 3},
-  {x: 5, y: 4},
-  {x: 5, y: 5},
-  {x: 6, y: 3},
-  {x: 7, y: 0},
-  {x: 7, y: 1},
-  {x: 7, y: 3},
-  {x: 7, y: 5},
-  {x: 8, y: 1},
-  {x: 8, y: 5},
-  {x: 9, y: 1},
-  {x: 9, y: 2},
-  {x: 9, y: 3},
-  {x: 9, y: 4},
-  {x: 9, y: 5},
-  {x: 11, y: 0},
-  {x: 11, y: 1},
-  {x: 11, y: 2},
-  {x: 11, y: 3},
-  {x: 11, y: 5},
-  {x: 12, y: 5},
-  {x: 13, y: 1},
-  {x: 13, y: 2},
-  {x: 13, y: 3},
-  {x: 13, y: 4},
-  {x: 13, y: 5},
-  {x: 14, y: 1},
-  {x: 14, y: 5},
-  {x: 15, y: 1},
-  {x: 15, y: 2},
-  {x: 15, y: 3},
-  {x: 15, y: 5},
-  {x: 16, y: 1},
-  {x: 16, y: 5},
-  {x: 17, y: 1},
-  {x: 17, y: 3},
-  {x: 17, y: 4},
-  {x: 17, y: 5},
-  {x: 18, y: 3},
+  { x: 0, y: 5 },
+  { x: 1, y: 1 },
+  { x: 1, y: 2 },
+  { x: 1, y: 3 },
+  { x: 1, y: 5 },
+  { x: 2, y: 3 },
+  { x: 3, y: 0 },
+  { x: 3, y: 1 },
+  { x: 3, y: 2 },
+  { x: 3, y: 3 },
+  { x: 3, y: 5 },
+  { x: 3, y: 6 },
+  { x: 4, y: 5 },
+  { x: 5, y: 1 },
+  { x: 5, y: 2 },
+  { x: 5, y: 3 },
+  { x: 5, y: 4 },
+  { x: 5, y: 5 },
+  { x: 6, y: 3 },
+  { x: 7, y: 0 },
+  { x: 7, y: 1 },
+  { x: 7, y: 3 },
+  { x: 7, y: 5 },
+  { x: 8, y: 1 },
+  { x: 8, y: 5 },
+  { x: 9, y: 1 },
+  { x: 9, y: 2 },
+  { x: 9, y: 3 },
+  { x: 9, y: 4 },
+  { x: 9, y: 5 },
+  { x: 11, y: 0 },
+  { x: 11, y: 1 },
+  { x: 11, y: 2 },
+  { x: 11, y: 3 },
+  { x: 11, y: 5 },
+  { x: 12, y: 5 },
+  { x: 13, y: 1 },
+  { x: 13, y: 2 },
+  { x: 13, y: 3 },
+  { x: 13, y: 4 },
+  { x: 13, y: 5 },
+  { x: 14, y: 1 },
+  { x: 14, y: 5 },
+  { x: 15, y: 1 },
+  { x: 15, y: 2 },
+  { x: 15, y: 3 },
+  { x: 15, y: 5 },
+  { x: 16, y: 1 },
+  { x: 16, y: 5 },
+  { x: 17, y: 1 },
+  { x: 17, y: 3 },
+  { x: 17, y: 4 },
+  { x: 17, y: 5 },
+  { x: 18, y: 3 },
 ];
 
 const treasures = [
-  {x: 4, y: 6},
-  {x: 14, y: 2},
+  { x: 4, y: 6 },
+  { x: 14, y: 2 },
 ];
 
-//item received when treasure is picked up
+// item received when treasure is picked up
 const giveItem = () => {
-  let itemIndex = Math.random();
-  if (itemIndex < .7) {
-      player.inventory[0].potion += 1;
-      const potionBox = document.querySelector('.potions');
-      potionBox.innerText = `P: potions (${player.inventory[0].potion})`;      
-      addActionText('You received a potion');
+  const itemIndex = Math.random();
+  if (itemIndex < 0.7) {
+    player.inventory[0].potion += 1;
+    const potionBox = document.querySelector('.potions');
+    potionBox.innerText = `P: potions (${player.inventory[0].potion})`;
+    addActionText('You received a potion');
   }
-  else if (itemIndex >= .7) {
-      player.weapon = shortSword;
-      addActionText('You obtained a short sword, +.4 damage multiplier');
-      currentWeapon = document.querySelector('.weapon');
-      currentWeapon.innerText = 'weapon: short sword';
+  else if (itemIndex >= 0.7) {
+    player.weapon = shortSword;
+    addActionText('You obtained a short sword, +.4 damage multiplier');
+    currentWeapon = document.querySelector('.weapon');
+    currentWeapon.innerText = 'weapon: short sword';
   }
-}
+};
 
-//if win condition is met,
-//open exit from the level
+// if win condition is met,
+// open exit from the level
 const openPortal = () => {
   portal = 0;
   document.querySelector('.portal').style.backgroundImage = "url('img/openPortal.gif')";
-}
+};
 
-//function to handle combat action
+// function to handle combat action
 const combat = (monster) => {
   monster.currentHealth -= player.attackDamage();
   player.currentHealth -= monster.attackDamage();
   updateHPStats(player);
-}
+};
 
 // Check if there is a wall at the provided coordinates.
 // Returns a Boolean
 const isThereAWallAt = (x, y) => {
   // Loop through walls, and check if any wall is at the given point.
-  for (let i = 0; i < walls.length; i++) {
+  for (let i = 0; i < walls.length; i += 1) {
     const wall = walls[i];
     if (wall.x === x && wall.y === y) {
       return true;
@@ -213,7 +213,7 @@ const canMoveTo = (x, y) => {
     return false;
   }
 
-  //is there a portal and is it open?
+  // is there a portal and is it open?
   if (isThereAPortalAt(x, y) && portal === 1) {
     return false;
   }
@@ -225,14 +225,14 @@ const canMoveTo = (x, y) => {
   // the player and monster attack each other.
   // If the monster is dead, remove it from the DOM
   if (isThereAMonsterAt(x, y)) {
-    for (let i = 0; i < monsters.length; i++) {
+    for (let i = 0; i < monsters.length; i += 1) {
       const monster = monsters[i];
       if (monster.x === x && monster.y === y) {
         combat(monster);
         if (!isCreatureAlive(monster)) {
           monsters.splice(i, 1);
           document.querySelector(`#xy${x}${y}`).remove();
-          addActionText(`You killed the monster`);
+          addActionText('You killed the monster');
         }
         if (!isCreatureAlive(player)) {
           displayLoseMessage();
@@ -251,15 +251,16 @@ const canMoveTo = (x, y) => {
 const isCreatureAlive = (creature) => {
   if (creature.currentHealth > 0) {
     return true;
-  } else{
+  } else {
     return false;
   }
 };
 
 // Check if there is a monster at the provided coordinates.
 // Returns a Boolean
+
 const isThereAMonsterAt = (x, y) => {
-  for (let i = 0; i < monsters.length; i++) {
+  for (let i = 0; i < monsters.length; i += 1) {
     const monster = monsters[i];
     if (monster.x === x && monster.y === y) {
       return true;
@@ -272,7 +273,7 @@ const isThereAMonsterAt = (x, y) => {
 // Returns a Boolean
 const isThereATreasureAt = (x, y) => {
   // Loop through treasures, and check if any treasure is at the given point.
-  for (let i = 0; i < treasures.length; i++) {
+  for (let i = 0; i < treasures.length; i += 1) {
     const treasure = treasures[i];
     if (treasure.x === x && treasure.y === y) {
       giveItem();
@@ -283,8 +284,8 @@ const isThereATreasureAt = (x, y) => {
 };
 
 const isThereAPortalAt = (x, y) => {
-  //checks for portal at the given point
-  if (x === 18 && y ===4) {
+  // checks for portal at the given point
+  if (x === 18 && y === 4) {
     return true;
   }
   return false;
@@ -293,7 +294,7 @@ const isThereAPortalAt = (x, y) => {
 // Remove the treasure from the global treasure array.
 // Returns nothing
 const removeTreasureAt = (x, y) => {
-  for (let i = 0; i < treasures.length; i++) {
+  for (let i = 0; i < treasures.length; i += 1) {
     const treasure = treasures[i];
     if (treasure.x === x && treasure.y === y) {
       treasures.splice(i, 1);
@@ -314,8 +315,8 @@ const movePlayerTo = (x, y) => {
     removeTreasureAt(x, y);
     // renderTreasures();
   }
-  //If the monster are all ded,
-  //open an exit from the level
+  // If the monster are all ded,
+  // open an exit from the level
   if (monsters.length === 0) {
     openPortal();
   }
@@ -363,7 +364,7 @@ const displayWinMessage = () => {
   }
   const winMessageElement = document.createElement('div');
   winMessageElement.className = 'win-message';
-  winMessageElement.innerHTML = 'You have reached the next level';
+  winMessageElement.innerHTML = 'You Win!';
   document.querySelector('.playBoard').appendChild(winMessageElement);
 };
 
@@ -381,35 +382,34 @@ const displayLoseMessage = () => {
 };
 
 
-//opening and closing inventory functions with event listeners
+// opening and closing inventory functions with event listeners
 const inventoryEvent = (evt) => {
   const keyCode = evt.keyCode;
-    switch (keyCode) {
-      case 80:
+  switch (keyCode) {
+    case 80:
       player.drinkPot();
       break;
-      case 27:
+    case 27:
       closeInventory();
       break;
-    }
-}
+  }
+};
 
 const openInventory = () => {
-  inventoryBox = document.querySelector('.inventory');
+  let inventoryBox = document.querySelector('.inventory');
   inventoryBox.style.visibility = 'visible';
   document.body.addEventListener('keydown', inventoryEvent);
-  console.log('openInventory')
-}
+};
 
 const closeInventory = () => {
-  inventoryBox = document.querySelector('.inventory');
+  let inventoryBox = document.querySelector('.inventory');
   inventoryBox.style.visibility = 'hidden';
   document.body.removeEventListener('keydown', inventoryEvent)
-}
+};
 
-//-------------------------------Moving to view.js later-----------------------------
+//--------------------------------------------------------------------------------------
 
-//render stats in aside
+// render stats in aside
 const renderHPStats = () => {
   const hpLine = document.createElement('div');
   hpLine.className = 'statLine';
@@ -427,15 +427,15 @@ const renderHPStats = () => {
 }
 renderHPStats();
 
-//update HP text and health bar after taking damage
+// update HP text and health bar after taking damage
 const updateHPStats = (creature) => {
   const currentHPBar = document.querySelector(".currentHP");
-  currentHPBar.style.width = ((creature.currentHealth / creature.totalHealth)*100).toString() + "%";
+  currentHPBar.style.width = ((creature.currentHealth / creature.totalHealth) * 100).toString() + "%";
   const currentHPText = document.querySelector(".hpText");
   currentHPText.innerText = `Health: ${creature.currentHealth}/${creature.totalHealth}`;
 }
 
-//render strength stat in aside
+// render strength stat in aside
 const renderStrengthStat = () => {
   const strengthStat = document.createElement('div');
   strengthStat.className = 'statLine';
@@ -444,7 +444,7 @@ const renderStrengthStat = () => {
 }
 renderStrengthStat();
 
-//render weapon stat in aside
+// render weapon stat in aside
 const renderCurrentWeapon = () => {
   const currentWeapon = document.createElement('div');
   currentWeapon.className = 'statLine';
@@ -458,12 +458,12 @@ const renderCurrentWeapon = () => {
 }
 renderCurrentWeapon();
 
-//line break separating stats from inpot options in aside
+// line break separating stats from inpot options in aside
 const statLineBreak = document.createElement('div');
 statLineBreak.className = 'statLineBreak';
 document.querySelector('aside').appendChild(statLineBreak);
 
-//adding movement buttons to aside
+// adding movement buttons to aside
 const renderMovement = () => {
   const movementText = document.createElement('div');
   movementText.className = 'statLine';
@@ -480,7 +480,7 @@ const renderMovement = () => {
 }
 renderMovement();
 
-//render option to open inventory in aside
+// render option to open inventory in aside
 const buttonOptions = () => {
   const inventorybutton = document.createElement('div');
   inventorybutton.className = 'statLine';
@@ -490,7 +490,7 @@ const buttonOptions = () => {
 buttonOptions();
 
 
-//Add text to the footer action field
+// Add text to the footer action field
 const addActionText = (string) => {
   const actionText = document.createElement('div')
   actionText.innerText += `${string}`;
@@ -508,7 +508,6 @@ const renderPortal = () => {
   portalElement.style.left = (18 * 50).toString() + 'px';
   portalElement.style.top = (4 * 50).toString() + 'px';
   document.querySelector('.playBoard').appendChild(portalElement);
-  
 };
 renderPortal();
 
@@ -529,7 +528,7 @@ renderWalls();
 
 // Create monster DOM elements and add them to the playBoard.
 const renderMonsters = () => {
-  for (let i = 0; i < monsters.length; i++) {
+  for (let i = 0; i < monsters.length; i += 1) {
     const monster = monsters[i];
     const monsterElement = document.createElement('div');
     monsterElement.className = 'monster';
@@ -547,11 +546,11 @@ renderMonsters();
 const renderTreasures = () => {
   // Remove treasures if any are on the grid.
   const treasureElements = document.querySelectorAll('.treasure');
-  for (let i = 0; i < treasureElements.length; i++) {
+  for (let i = 0; i < treasureElements.length; i += 1) {
     treasureElements[i].remove();
   }
-  
-  for (let i = 0; i < treasures.length; i++) {
+
+  for (let i = 0; i < treasures.length; i += 1) {
     const treasure = treasures[i];
     const treasureElement = document.createElement('div');
     treasureElement.className = 'treasure';
@@ -575,7 +574,7 @@ const renderPlayer = () => {
 };
 renderPlayer();
 
-//render inventory field and hide it
+// render inventory field and hide it
 const inventory = () => {
   const inventoryBox = document.createElement('div');
   inventoryBox.className = 'inventory';
@@ -588,7 +587,8 @@ const inventory = () => {
   const escBox = document.createElement('div');
   escBox.innerText = `esc: close inventory`;
   document.querySelector('.inventory').appendChild(escBox);
-}
+};
+
 inventory();
 
 // Add an event listener for when the user presses keys.
@@ -602,19 +602,19 @@ document.body.addEventListener('keydown', evt => {
   // Attempt to move the player in the direction
   switch (keyCode) {
     case 37:
-    moveLeft();
-    break;
+      moveLeft();
+      break;
     case 38:
-    moveUp();
-    break;
+      moveUp();
+      break;
     case 39:
-    moveRight();
-    break;
+      moveRight();
+      break;
     case 40:
-    moveDown();
-    break;
+      moveDown();
+      break;
     case 73:
-    openInventory();
-    break;
+      openInventory();
+      break;
   }
 });

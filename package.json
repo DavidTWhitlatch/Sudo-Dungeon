@@ -1,0 +1,26 @@
+{
+  "name": "Sudo-Dungeon",
+  "version": "1.0.0",
+  "description": "The goal of Sudo Dungeon was to make a very traditional dungeon crawler game that is easy to use and understand. I did not want to sacrifice features or complexity but a player shouldn't need to look up rules or guides to be able to play the game. To accomplish this, I wanted to keep an aside container that would display all of the options that a player could take. Additionally there is action text at the bottom of the screen to inform the player of everything that is happening in the game. My initial rough wireframes looked as so: ![wireframes](https://github.com/DavidTWhitlatch/Sudo-Dungeon/blob/master/img/wireframes.jpg \"wireframes\")",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DavidTWhitlatch/Sudo-Dungeon.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DavidTWhitlatch/Sudo-Dungeon/issues"
+  },
+  "homepage": "https://github.com/DavidTWhitlatch/Sudo-Dungeon#readme"
+}

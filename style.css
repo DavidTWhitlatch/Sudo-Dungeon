@@ -141,7 +141,7 @@ div {
     float: left;
     margin: 0;
     padding: 0;
-    display: inline-block;
+    display: block;
 }
 
 .currentHP {
@@ -150,7 +150,7 @@ div {
     height: 20px;
     width: 100%;
     background-color: #8ae234;
-    display: inline-block;
+    display: block;
 }
 
  .playField {
