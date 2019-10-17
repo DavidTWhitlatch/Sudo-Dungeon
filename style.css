@@ -1,254 +1,251 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
 header {
-    padding: 1px;
-    font-size: 50px;
-    border-bottom: 2px solid black;
-    background-image: url('img/stoneBackground.png');
-    color: black;
-    text-shadow: 2px 2px 2px white;
+  padding: 1px;
+  font-size: 50px;
+  border-bottom: 2px solid black;
+  background-image: url('img/stoneBackground.png');
+  color: black;
+  text-shadow: 2px 2px 2px white;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 h2 {
-    margin: 0 100px;
-    text-align: center;
+  margin: 0 100px;
+  text-align: center;
 }
 
 div {
-    text-align: left;
-    margin: 50px;
+  text-align: left;
+  margin: 50px;
 }
 
 .home {
-    text-align: center;
+  text-align: center;
 }
 
-.start-btn{
-    font-family: 'Press Start 2P', cursive;
-    text-align: center;
-	display: inline-block;
-	margin:5px;
-    font-weight: bold;
-    padding: 10px 10px 10px 10px ;
-    background-color: lightgray;
-    text-shadow: -1px -1px black, 1px 1px white;
-    color: gray;
-    -webkit-border-radius: 7px;
-	-moz-border-radius: 7px;
-	-o-border-radius: 7px;
-	border-radius: 7px;
-    box-shadow: 0 .2em gray; 
-    cursor: pointer;
-
+.start-btn {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  display: inline-block;
+  margin: 5px;
+  font-weight: bold;
+  padding: 10px 10px 10px 10px;
+  background-color: lightgray;
+  text-shadow: -1px -1px black, 1px 1px white;
+  color: gray;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  -o-border-radius: 7px;
+  border-radius: 7px;
+  box-shadow: 0 .2em gray;
+  cursor: pointer;
 }
+
 .start-btn:active {
-	box-shadow: none;
-	position: relative;
-	top: .2em;
+  box-shadow: none;
+  position: relative;
+  top: .2em;
 }
 
 .play {
-    font-size: 70px;
-    padding: 40px 20px 40px 40px;
+  font-size: 70px;
+  padding: 40px 20px 40px 40px;
 }
 
 .clearfix {
-    margin: 0;
+  margin: 0;
 }
 
 .clearfix:after {
-    content: " ";
-    visibility: hidden;
-    display: block;
-    height: 0;
-    clear: both;
- }
+  content: " ";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
 
- aside {
-    font-family: 'Press Start 2P', cursive;
-    color: white;
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    background-color:black;
-    width: 20vw;
-    height: 80vh;
-    padding: 0;
- }
-
- footer {
-    font-family: 'Press Start 2P', cursive;
-    color: white;
-    position:fixed;
-    bottom:0;
-    background-color: black;
-    height: 20vh;
-    width: 100vw;
-    transform: rotate(180deg);
-    direction: rtl;
-    padding: 50px;
-    background-image: url(img/footerBackground.png);
-    background-size: auto;
-    background-position: center;
- }
-
- .actionField{
-     margin: 0;
-     padding: 0;
- }
+aside {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  background-color: black;
+  width: 20vw;
+  height: 80vh;
+  padding: 0;
+}
 
 .statLine {
-    margin: 0;
-    height: 20px;
-    width: 100%;
-    padding: 25px 10px;
-    display: inline-block;
+  margin: 0;
+  height: 20px;
+  width: 100%;
+  padding: 25px 10px;
+  display: inline-block;
 }
 
 .statLineBreak {
-    border-top: 2px solid white;
-    margin: 0;
-    width: 100%;
-    display: inline-block;
+  border-top: 2px solid white;
+  margin: 0;
+  width: 100%;
+  display: inline-block;
 }
 
 .buttonCenter {
-    margin: 0;
-    height: 20px;
-    width: 100%;
-    padding: 0px 10px;
-    display: inline-block;
-    text-align: center;
-    font-size: 30px;
+  margin: 0;
+  height: 20px;
+  width: 100%;
+  padding: 0px 10px;
+  display: inline-block;
+  text-align: center;
+  font-size: 30px;
 }
 
 .totalHP {
-    float: right;
-    margin: 0;
-    height: 20px;
-    width: 55%;
-    background-color: grey;
- }
+  float: right;
+  margin: 0;
+  height: 20px;
+  width: 55%;
+  background-color: grey;
+}
 
 .hpText {
-    height: 20px;
-    float: left;
-    margin: 0;
-    padding: 0;
-    display: block;
+  height: 20px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  display: block;
 }
 
 .currentHP {
-    float: left;
-    margin: 0;
-    height: 20px;
-    width: 100%;
-    background-color: #8ae234;
-    display: block;
+  float: left;
+  margin: 0;
+  height: 20px;
+  width: 100%;
+  background-color: #8ae234;
+  display: block;
 }
 
- .playField {
-    margin: 0;
-    width: 80vw;
-    height: 80vh;
-    background-color: black;
-    background-image: url(img/stoneBackground.png)
+.playField {
+  margin: 0;
+  width: 80vw;
+  height: 80vh;
+  background-color: black;
+  background-image: url(img/stoneBackground.png)
+}
 
-
- }
-
-.playBoard{
-    position: relative;
-    background-image: url(img/gameBoard.png);
-    width: 1050px;
-    height: 450px;
-    margin: 5vh auto 5vh auto;
+.playBoard {
+  position: relative;
+  background-image: url(img/gameBoard.png);
+  width: 1050px;
+  height: 450px;
+  margin: 5vh auto 5vh auto;
 }
 
 .wall {
-    position: absolute;
-    width: 50px;
-    height: 50px;
+  position: absolute;
+  width: 50px;
+  height: 50px;
 }
 
 .treasure {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: url(img/treasure.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url(img/treasure.png);
 }
 
 .player {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: url(img/player.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url(img/player.png);
 }
 
 .monster {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: url(img/monster.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url(img/monster.png);
 }
 
 .portal {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-image: url(img/closedPortal.png);
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-image: url(img/closedPortal.png);
 }
 
 .win-message {
-    position: absolute;
-    width: 1000px;
-    height: 400px;
-    top: -50px;
-    left: -50px;
-    background-color: rgba(255,255,255,0.75);
-    font-family: 'Press Start 2P', cursive;
-    text-align: center;
-    font-weight: 700;
-    font-size: 4rem;
-    padding: 25px;
+  position: absolute;
+  width: 1000px;
+  height: 400px;
+  top: -50px;
+  left: -50px;
+  background-color: rgba(255, 255, 255, 0.75);
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  font-weight: 700;
+  font-size: 4rem;
+  padding: 25px;
 }
 
 .inventory {
-    position: absolute;
-    width: 1050px;
-    height: 450px;
-    top: -50px;
-    left: -50px;
-    background-image: url('img/scrollBackground.png');
-    font-family: cursive;
-    text-align: left;
-    font-weight: 700;
-    font-size: 2em;
+  position: absolute;
+  width: 1050px;
+  height: 450px;
+  top: -50px;
+  left: -50px;
+  background-image: url('img/scrollBackground.png');
+  font-family: cursive;
+  text-align: left;
+  font-weight: 700;
+  font-size: 2em;
 }
 
 .lose-message {
-    position: absolute;
-    width: 1050px;
-    height: 450px;
-    top: -50px;
-    left: -50px;
-    background-color: rgba(0, 0, 0, 0.75);
-    font-family: 'Inconsolata', monospace;
-    text-align: center;
-    color: rgba(255, 0, 0, 0.75);
-    font-weight: 700;
-    font-size: 4rem;
+  position: absolute;
+  width: 1050px;
+  height: 450px;
+  top: -50px;
+  left: -50px;
+  background-color: rgba(0, 0, 0, 0.75);
+  font-family: 'Inconsolata', monospace;
+  text-align: center;
+  color: rgba(255, 0, 0, 0.75);
+  font-weight: 700;
+  font-size: 4rem;
+}
+
+footer {
+  font-family: 'Press Start 2P', cursive;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  background-color: black;
+  height: 20vh;
+  width: 100vw;
+  transform: rotate(180deg);
+  padding: 50px;
+  background-image: url(img/footerBackground.png);
+  background-size: auto;
+  background-position: center;
+}
+
+.actionField {
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 .actionText {
-    margin: 0;
-    transform: rotate(180deg);
-    direction: rtl;
-    text-align: left;
+  margin: 0;
+  transform: rotate(180deg);
+  text-align: left;
 }

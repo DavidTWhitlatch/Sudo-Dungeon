@@ -21,7 +21,7 @@ class Player {
     const hit = Math.random();
     const damage = this.strength * this.weapon;
     if (hit < this.hitChance) {
-      addActionText(`Monster took ${damage} damage`);
+      addActionText(`Monster took ${damage} damage!`);
       return damage;
     } else {
       addActionText(`You missed`);
@@ -493,7 +493,7 @@ buttonOptions();
 // Add text to the footer action field
 const addActionText = (string) => {
   const actionText = document.createElement('div')
-  actionText.innerText += `${string}`;
+  actionText.innerHTML = string;
   actionText.className = 'actionText';
   document.querySelector('.actionField').prepend(actionText)
 }
